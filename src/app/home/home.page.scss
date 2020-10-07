@@ -1,6 +1,6 @@
 #container {
   text-align: center;
-
+  padding: 1%;
   position: absolute;
   left: 0;
   right: 0;
@@ -25,3 +25,15 @@
 #container a {
   text-decoration: none;
 }
+
+#container .red {
+  color: palevioletred;
+}
+
+ion-title {
+  text-align: center;
+}
+
+
+
+

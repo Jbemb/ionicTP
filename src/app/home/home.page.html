@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Open Trivia
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,8 +13,111 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="container" class="ion-padding">
+    <strong>Open Trivia</strong>
+
+    <!--formulaire-->
+    <ion-list *ngIf="!isStarted">
+      <ion-item>
+        <ion-label position="floating">Player Name</ion-label>
+        <ion-input type="text" [(ngModel)]="pseudo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Difficulty</ion-label>
+        <ion-select [(ngModel)]="difficulty">
+          <ion-select-option value="easy">Easy</ion-select-option>
+          <ion-select-option value="medium">Medium</ion-select-option>
+          <ion-select-option value="hard">Hard</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-toggle color="tertiary" [(ngModel)]="save"></ion-toggle>
+        <ion-label>Save my information</ion-label>
+      </ion-item>
+
+      <ion-button color="tertiary" expand="full" (click)="start()">start</ion-button>
+    </ion-list>
+
+    <ion-list *ngIf="isStarted">
+      <div>
+        <ion-note color="tertiary">Welcome {{pseudo}}</ion-note>
+        <!-- also can use ion-text tags-->
+      </div>
+      <div>
+        <h2>{{questionDisplayed.question}}</h2>
+      </div>
+      
+        <ion-grid *ngIf="answers && answers.length > 0">
+        <ion-row>
+          <ion-col size="6" *ngFor="let answer of answers">
+            <ion-button color="tertiary" (click)="questionAnswered(answer)">{{answer}}</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>   
+
+       <!-- <div>
+        <ion-button color="tertiary" (click)="questionAnswered('A')">{{a}}</ion-button>
+        <ion-button color="tertiary" (click)="questionAnswered('B')">B</ion-button>
+      </div>
+      <div>
+        <ion-button color="tertiary" (click)="questionAnswered('C')">C</ion-button>
+        <ion-button color="tertiary" (click)="questionAnswered('D')">D</ion-button>
+      </div>   -->
+
+      <div *ngIf="isAnswered">
+        <ion-button expand="full" color="tertiary" (click)="nextQuestion()">Next</ion-button>
+        <ion-note>Your score: {{score}}</ion-note>
+      </div>
+    </ion-list>
+
+    <div *ngIf="isOver">
+      <ion-button expand="full" color="tertiary" (click)="start()">Game Over, Start Again</ion-button>
+    </div>
+
+
+
+
+
+
+
+    <!-- <div *ngIf="!isStarted">
+      <h3>Your Name</h3>
+      <input type="text" [(ngModel)]="pseudo" />
+      <h3>Difficulty</h3>
+      <select [(ngModel)]="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <br> 
+      <div>
+        <input type="checkbox" id="box" [(ngModel)]="isSaved">
+        <label for="box">Save my information</label>
+      </div>
+      <br>
+      <div *ngIf="error">
+        <p class="red">{{error}}</p>
+      </div>
+      <button (click)="start()">Start</button>
+    </div>
+
+    
+    <div id="question" *ngIf="isStarted">
+      <p>Welcome {{pseudo}}</p>
+      <h2>Which month of the year has 28 days?</h2>
+      <div class="btn-group">
+        <button (click)="nextQuestion('A')">A</button>
+        <button (click)="nextQuestion('B')">B</button>
+        <button (click)="nextQuestion('C')">C</button>
+        <button (click)="nextQuestion('D')">D</button>
+      </div>
+      <br><br>
+      <div *ngIf="isAnswered">
+        <button>Next</button>
+      </div>
+    </div>-->
+
+
   </div>
+
 </ion-content>
