@@ -44,13 +44,13 @@
         <!-- also can use ion-text tags-->
       </div>
       <div>
-        <h2>{{questionDisplayed.question}}</h2>
+        <h2 [innerHTML]="questionDisplayed.question">{{questionDisplayed.question}}</h2>
       </div>
       
         <ion-grid *ngIf="answers && answers.length > 0">
         <ion-row>
           <ion-col size="6" *ngFor="let answer of answers">
-            <ion-button color="tertiary" (click)="questionAnswered(answer)">{{answer}}</ion-button>
+            <ion-button [color]="!isAnswered ? 'tertiary' : (answer === questionDisplayed.correct_answer ? 'success' : 'danger')" [innerHTML]="answer" (click)="questionAnswered(answer)">{{answer}}</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>   
@@ -64,7 +64,7 @@
         <ion-button color="tertiary" (click)="questionAnswered('D')">D</ion-button>
       </div>   -->
 
-      <div *ngIf="isAnswered">
+      <div *ngIf="isAnswered && !isOver">
         <ion-button expand="full" color="tertiary" (click)="nextQuestion()">Next</ion-button>
         <ion-note>Your score: {{score}}</ion-note>
       </div>

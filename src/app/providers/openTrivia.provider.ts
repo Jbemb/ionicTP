@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Question } from '../models/questions';
 
-@Injectable()
+@Injectable({
+    //can declare it here instead of the app.module
+    providedIn:'root'
+})
 export class OpenTriviaService {
 
     public getQuestions(questions: number, difficultyLevel: string):
