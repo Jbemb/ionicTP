@@ -14,7 +14,7 @@
   </ion-header>
 
   <div id="container" class="ion-padding">
-    <strong>Open Trivia</strong>
+    <strong *ngIf="isStarted">Question {{questionNumber}} of {{nomQuest}} </strong>
 
     <!--formulaire-->
     <ion-list *ngIf="!isStarted">
@@ -71,7 +71,8 @@
     </ion-list>
 
     <div *ngIf="isOver">
-      <ion-button expand="full" color="tertiary" (click)="start()">Game Over, Start Again</ion-button>
+      <ion-button expand="full" color="tertiary" (click)="return()">Game Over, Start Again</ion-button>
+      <ion-note>Your score: {{score}} out of {{nomQuest}}</ion-note>
     </div>
 
 
